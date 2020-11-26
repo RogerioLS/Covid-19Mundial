@@ -23,7 +23,7 @@ Utilizei um recurso que pode transformar um arquivo **.ipynb** para **.py** se n
 !awk '!/ipython/' YOURNOTEBOOKNAME.py >  temp.py && mv temp.py app.py && rm YOURNOTEBOOKNAME.py
 !streamlit YOURNOTEBOOKNAME app.py
 ```
-**Link para entenrder um pouco mais sobre o script:**
+**Link para entender um pouco mais sobre o script:**
 
 [Clique aqui para saber mais](https://github.com/ChristianFJung/NotebookToWebApp/blob/master/article.md)
 
