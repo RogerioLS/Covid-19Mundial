@@ -1,0 +1,3 @@
+altair=4.1.0=pypi_0
+pandas=1.1.3=py37ha925a31_0
+streamlit=0.71.0=pypi_0
