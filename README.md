@@ -13,6 +13,7 @@ Porém resolvi segui com uma outra liguagem de programação, e utilizei o **Pyt
 Para fazer a capturas dos dados que foram utilizar para realizar essa tarefa eu utilizei o Repositório de dados COVID-19 pelo Centro de Ciência e Engenharia de Sistemas (CSSE) da Universidade Johns Hopkins, esse repositório é atualizado com fraquencia com fonte de dados confiáveis do mundo todo.
 
 **Link para ser direcionado para o repositório:**
+
 [Clique aqui para olhar e entender melhor as fontes dos dados](https://github.com/CSSEGISandData/COVID-19)
 
 Utilizei um recurso que pode transformar um arquivo **.ipynb** para **.py** se não terei que ficar utilizando duas ID's, no caso **pyCharm** e o **jupyternotebook** a baixo o script:
@@ -23,6 +24,7 @@ Utilizei um recurso que pode transformar um arquivo **.ipynb** para **.py** se n
 !streamlit YOURNOTEBOOKNAME app.py
 ```
 **Link para entenrder um pouco mais sobre o script:**
+
 [Clique aqui para saber mais](https://github.com/ChristianFJung/NotebookToWebApp/blob/master/article.md)
 
 A seguir um exemplo de como ficou na prática nossa dash:
