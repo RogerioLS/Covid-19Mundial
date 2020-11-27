@@ -27,6 +27,12 @@ Utilizei um recurso que pode transformar um arquivo **.ipynb** para **.py** se n
 
 [Clique aqui para saber mais](https://github.com/ChristianFJung/NotebookToWebApp/blob/master/article.md)
 
+Também utilizei a ferramente **Heroku** para fazer o deploy e subir essa dash linda. Ela ficara disponível para o público.
+
+**Link para dash linda 🦠**
+
+[Clique aqui para ser direcionado](https://covid-mundial.herokuapp.com/)
+
 A seguir um exemplo de como ficou na prática nossa dash:
 
 <p align="center"> 
