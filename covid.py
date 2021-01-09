@@ -8,6 +8,14 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 
+import matplotlib.pyplot as plt
+from datetime import datetime
+from statsmodels.tsa.arima_model import ARIMA
+from pmdarima.arima import ADFTest
+import warnings 
+warnings.filterwarnings('ignore')
+
+
 @st.cache
 def get_UN_date():
     df = pd.read_csv("dadosCovidPaises.csv")
@@ -19,8 +27,8 @@ df = get_UN_date()
 st.markdown("![Alt Center](https://media.giphy.com/media/JRsY1oIVA7IetTkKVO/giphy.gif)")
 
 #st.title("Dados Covid-19 mundialmente")
-st.title('🦠 Covid-19 Dashborad 🦠 ')
-st.sidebar.markdown('🦠 **Covid-19 Dashborad** 🦠 ')
+st.title('🦠 Covid-19 Dashboard 🦠 ')
+st.sidebar.markdown('🦠 **Covid-19 Dashboard** 🦠 ')
 st.sidebar.markdown(''' 
 Este aplicativo fornece informações sobre infecções por Covid-19 em todo o mundo.
 Os dados considerados para esta análise são de 10 meses, começando de 22-01-2020 a 24-11-2020
@@ -54,14 +62,50 @@ chart = (
 
 st.altair_chart(chart, use_container_width=True)
 
+def trans_data(data):
+    dados = pd.DataFrame(data).rename_axis('data')
+    dados.reset_index(level=0, inplace = True)
+    dados['data'] = pd.to_datetime(dados['data'])
+    dados = dados.set_index('data')
+    dados = dados.fillna(method = 'ffill')
+    #ts = dados['Brazil']
+    adf_test = ADFTest(alpha = 0.05)
+    adf_test.should_diff(dados)
+    modelo = ARIMA(dados, order=(2, 1, 2),freq=dados.index.inferred_freq) 
+    modelo_treinado = modelo.fit(disp=False)
+    #plt.rcParams.update({'font.size': 10})
+    plt.rcParams['xtick.labelsize'] = 15
+    plt.rcParams['ytick.labelsize'] = 15
+    eixo = dados.plot(figsize=(12, 8))
+    modelo_treinado.plot_predict('2020-12-20', '2021-01-15', ax = eixo, plot_insample = True)
+    plt.title('Forecast dados Infectados', fontweight='bold', fontsize=15)
+    #plt.gcf().set_size_inches(20, 18)
+    plt.xlabel('Meses', fontweight='bold', fontsize=15) 
+    plt.ylabel('Valor em milhões', fontweight='bold',  fontsize=15)
+    #st.pyplot()
+    return st.pyplot()
 
-tabela_dois = st.sidebar.checkbox('Tabela de dados completa')
+tabela_dois = st.sidebar.checkbox('Gráfico de Forecast')
 if tabela_dois:
+    st.markdown('''Esse gráfico é totalmente dedicado para o Forecast com os números de infectados  com o periodo de '2020-12-20', '2021-01-15'.''')
+    classifier_name = st.selectbox('Selecione o País', (list(df.index)))
+    dados = df.loc[classifier_name]
+    dados = dados[dados > 0]
+    data = trans_data(dados)
+    showPyplotGlobalUse = False
+    st.write(data)
+
+tabela_tres = st.sidebar.checkbox('Tabela de dados completa')
+if tabela_tres:
     st.markdown('### Tabela de dados ' + str(df.shape[0]) + ' linhas e ' + str(df.shape[1]) + ' colunas.')
     st.write(df)
 
+st.markdown('''
+Para fazer a capturas dos dados que foram utilizar para realizar essa tarefa eu utilizei o 
+Repositório de dados COVID-19 pelo Centro de Ciência e Engenharia de Sistemas (CSSE) da Universidade Johns Hopkins, 
+esse repositório é atualizado com fraquencia com fonte de dados confiáveis do mundo todo.
 
+**Link para ser direcionado para o repositório:**
 
-
-
-
+[Clique aqui para olhar e entender melhor as fontes dos dados](https://github.com/CSSEGISandData/COVID-19)
+''')
