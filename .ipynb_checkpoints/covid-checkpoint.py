@@ -38,7 +38,7 @@ st.title('🦠 Covid-19 Dashboard 🦠 ')
 st.sidebar.markdown('🦠 **Covid-19 Dashboard** 🦠 ')
 st.sidebar.markdown(''' 
 Este aplicativo fornece informações sobre infecções por Covid-19 em todo o mundo.
-Os dados considerados para esta análise são de 14 meses, começando de 22-01-2020 a 02-04-2021
+Os dados considerados para esta análise são de 19 meses, começando de 22-01-2020 a 25-07-2021
 Selecione os diferentes paises para variar a visualização do gráficos que é interativo.
 Dica Role o mouse sobre o gráfico para sentir o recurso interativo para a melhor visualização de cada ponto.
 
@@ -83,7 +83,7 @@ def trans_data(data):
     plt.rcParams['xtick.labelsize'] = 15
     plt.rcParams['ytick.labelsize'] = 15
     eixo = dados.plot(figsize=(12, 8))
-    modelo_treinado.plot_predict('2021-01-31', '2021-04-15', ax = eixo, plot_insample = True)
+    modelo_treinado.plot_predict('2021-04-30', '2021-08-15', ax = eixo, plot_insample = True)
     plt.title('Forecast dados Infectados', fontweight='bold', fontsize=15)
     plt.xlabel('Meses', fontweight='bold', fontsize=15) 
     plt.ylabel('Valor em milhões', fontweight='bold',  fontsize=15)
@@ -92,7 +92,7 @@ def trans_data(data):
 tabela_dois = st.sidebar.checkbox('Gráfico de Forecast')
 if tabela_dois:
     st.markdown('''Esse gráfico é totalmente dedicado para o Forecast com os números de infectados 
-                    com o periodo de '2021-01-31', '2021-04-15'.''')
+                    com o periodo de '2021-04-30', '2021-08-15'.''')
     classifier_name = st.sidebar.selectbox('Selecione o País', (list(df.index)))
     dados = df.loc[classifier_name]
     dados = dados[dados > 0]
