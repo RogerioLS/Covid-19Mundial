@@ -38,7 +38,7 @@ st.title('🦠 Covid-19 Dashboard 🦠 ')
 st.sidebar.markdown('🦠 **Covid-19 Dashboard** 🦠 ')
 st.sidebar.markdown(''' 
 Este aplicativo fornece informações sobre infecções por Covid-19 em todo o mundo.
-Os dados considerados para esta análise são de 22 meses, começando de 22-01-2020 a 02-10-2021
+Os dados considerados para esta análise são de 23 meses, começando de 22-01-2020 a 06-12-2021
 Selecione os diferentes paises para variar a visualização do gráficos que é interativo.
 Dica Role o mouse sobre o gráfico para sentir o recurso interativo para a melhor visualização de cada ponto.
 
@@ -71,23 +71,20 @@ st.altair_chart(chart, use_container_width=True)
 
 def trans_data(data):
     dados = pd.DataFrame(data).rename_axis('data')
-    dados.reset_index(level=0, inplace = True)
+    dados.reset_index(level=0, inplace=True)
     dados['data'] = pd.to_datetime(dados['data'])
     dados = dados.set_index('data')
-    dados = dados.fillna(method = 'ffill')
-    adf_test = ADFTest(alpha = 0.05)
+    dados = dados.fillna(method='ffill')
+    adf_test = ADFTest(alpha=0.05)
     adf_test.should_diff(dados)
-    modelo = ARIMA(dados, order=(2, 1, 2),freq=dados.index.inferred_freq) 
+    modelo = ARIMA(dados, order=(2, 1, 2), freq=dados.index.inferred_freq)
     modelo_treinado = modelo.fit(disp=False)
-    #plt.rcParams.update({'font.size': 15})
-    plt.rcParams['xtick.labelsize'] = 15
-    plt.rcParams['ytick.labelsize'] = 15
-    eixo = dados.plot(figsize=(12, 8))
-    modelo_treinado.plot_predict('2021-01-30', '2021-11-30', ax = eixo, plot_insample = True)
-    plt.title('Forecast dados Infectados', fontweight='bold', fontsize=15)
-    plt.xlabel('Meses', fontweight='bold', fontsize=15) 
-    plt.ylabel('Valor em milhões', fontweight='bold',  fontsize=15)
-    return st.pyplot()
+    eixo = dados.plot(figsize=(10, 6))
+    modelo_treinado.plot_predict('2021-01-31', '2022-01-31', ax=eixo, plot_insample=True)
+    plt.title('Forecast dados Infectados')
+    plt.xlabel('Meses', fontweight='bold')
+    plt.ylabel('Valor em milhões')
+    return st.pyplot(plt)
 
 tabela_dois = st.sidebar.checkbox('Gráfico de Forecast')
 if tabela_dois:
@@ -98,7 +95,7 @@ if tabela_dois:
     dados = dados[dados > 0]
     data = trans_data(dados)
     showPyplotGlobalUse = False
-    st.write(data)
+    #st.write(data)
 
 
 tabela_tres = st.sidebar.checkbox('Tabela de dados completa')
