@@ -38,7 +38,7 @@ st.title('🦠 Covid-19 Dashboard 🦠 ')
 st.sidebar.markdown('🦠 **Covid-19 Dashboard** 🦠 ')
 st.sidebar.markdown(''' 
 Este aplicativo fornece informações sobre infecções por Covid-19 em todo o mundo.
-Os dados considerados para esta análise são de 23 meses, começando de 22-01-2020 a 06-12-2021
+Os dados considerados para esta análise são de 25 meses, começando de 22-01-2020 a 30-01-2022
 Selecione os diferentes paises para variar a visualização do gráficos que é interativo.
 Dica Role o mouse sobre o gráfico para sentir o recurso interativo para a melhor visualização de cada ponto.
 
@@ -80,7 +80,7 @@ def trans_data(data):
     modelo = ARIMA(dados, order=(2, 1, 2), freq=dados.index.inferred_freq)
     modelo_treinado = modelo.fit(disp=False)
     eixo = dados.plot(figsize=(10, 6))
-    modelo_treinado.plot_predict('2021-01-31', '2022-01-31', ax=eixo, plot_insample=True)
+    modelo_treinado.plot_predict('2021-01-31', '2022-02-28', ax=eixo, plot_insample=True)
     plt.title('Forecast dados Infectados')
     plt.xlabel('Meses', fontweight='bold')
     plt.ylabel('Valor em milhões')
@@ -89,7 +89,8 @@ def trans_data(data):
 tabela_dois = st.sidebar.checkbox('Gráfico de Forecast')
 if tabela_dois:
     st.markdown('''Esse gráfico é totalmente dedicado para o Forecast com os números de infectados 
-                    com o periodo de '2021-01-30', '2021-11-30'.''')
+                    com o periodo de 
+                    2021-01-31 à 2022-01-30.''')
     classifier_name = st.sidebar.selectbox('Selecione o País', (list(df.index)))
     dados = df.loc[classifier_name]
     dados = dados[dados > 0]
@@ -112,7 +113,3 @@ esse repositório é atualizado com fraquencia com fonte de dados confiáveis do
 
 [Clique aqui para olhar e entender melhor as fontes dos dados](https://github.com/CSSEGISandData/COVID-19)
 ''')
-
-
-
-
