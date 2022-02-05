@@ -2,6 +2,7 @@
 <img src="https://media.giphy.com/media/JRsY1oIVA7IetTkKVO/giphy.gif">
 </p>
 
+
 # 🦠 Analise para o Covid-19 🦠
 
 Xó covid, recentemente fiz uma analise com a aplicação utilizando o **Shiny** mas com outro foco, que foi trabalhar com o *yahoo finance* onde criei uma dash iterativa, que permitia o usuário colocar a sigla da ação desejada e era retornado pra ele o valor de venda e o volume de ações vendidas.
