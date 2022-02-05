@@ -37,9 +37,9 @@ Também utilizei a ferramente **Heroku** para fazer o deploy e subir essa dash l
 A seguir um exemplo de como ficou na prática nossa dash:
 
 <p align="center"> 
-<img src="fotos/foto.jpeg">
+<img src="fotos/foto_grafico.jpeg">
 </p>
 
 <p align="center"> 
-<img src="fotos/forecast.png">
+<img src="fotos/foto_forecast.png">
 </p>
