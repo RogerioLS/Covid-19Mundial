@@ -26,7 +26,7 @@ showPyplotGlobalUse = False
 @st.cache
 def get_UN_date():
     df = pd.read_csv("dadosCovidPaises.csv")
-    return df.set_index("Paises")
+    return df.set_index("Paises") 
 
 
 df = get_UN_date()
@@ -89,8 +89,7 @@ def trans_data(data):
 tabela_dois = st.sidebar.checkbox('Gráfico de Forecast')
 if tabela_dois:
     st.markdown('''Esse gráfico é totalmente dedicado para o Forecast com os números de infectados 
-                    com o periodo de 
-                    2021-01-31 à 2022-01-30.''')
+                    com o periodo de 2021-01-31 à 2022-01-30.''')
     classifier_name = st.sidebar.selectbox('Selecione o País', (list(df.index)))
     dados = df.loc[classifier_name]
     dados = dados[dados > 0]
