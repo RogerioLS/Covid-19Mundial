@@ -92,7 +92,7 @@ chart = (
 st.altair_chart(chart, use_container_width=True)
 
 
-tabela_dois = st.sidebar.checkbox('Gráfico de Forecast')
+tabela_dois = st.sidebar.checkbox('Gráficos')
 if tabela_dois:
     classifier_name = st.sidebar.selectbox('Selecione o País', (list(df.index)))
     dados = df.loc[classifier_name]
@@ -101,8 +101,7 @@ if tabela_dois:
     data_min_country = dd['data'].dt.strftime('%Y/%m/%d').min()
     data_max_country = dd['data'].dt.strftime('%Y/%m/%d').max()
     
-    st.markdown(f'''Esse gráfico é totalmente dedicado para o Forecast com os números de infectados 
-                    com o periodo de {data_min_country} à {data_max_country}.''')
+    st.markdown(f'''Nesses gráficos você encontrarar algumas análises desde quando início o contágio, média movel, quais dias da semana ocorreu o maior contágio, forecast desdo periodo de {data_min_country} à {data_max_country}.''')
     st.set_option('deprecation.showPyplotGlobalUse', False)
     showPyplotGlobalUse = False
     pltgraf = pltC.plot_graf(dd, name_country)
