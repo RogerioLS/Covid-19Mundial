@@ -2,6 +2,19 @@
 <img src="https://media.giphy.com/media/JRsY1oIVA7IetTkKVO/giphy.gif">
 </p>
 
+---
+
+<div align = center>
+
+![Static Badge](https://img.shields.io/badge/covid-19-blue)
+![License](https://img.shields.io/github/license/RogerioLS/Covid-19Mundial?color=dark-green)
+![Code size in bytes](https://img.shields.io/github/languages/code-size/RogerioLS/Covid-19Mundial?color=dark-green)
+![Top language](https://img.shields.io/github/languages/top/RogerioLS/Covid-19Mundial?color=dark-green)
+![Last commit](https://img.shields.io/github/last-commit/RogerioLS/Covid-19Mundial?color=dark-green)
+![Repo size](https://img.shields.io/github/repo-size/RogerioLS/Covid-19Mundial)
+![Languages](https://img.shields.io/github/languages/count/RogerioLS/Covid-19Mundial?color=red)
+
+</div>
 
 # 🦠 Analise para o Covid-19 🦠
 
