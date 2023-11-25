@@ -25,10 +25,10 @@ warnings.filterwarnings('ignore')
 showPyplotGlobalUse = False
 
 
-@st.cache
+@st.cache_data
 def get_UN_date():
     url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
-    df = pd.read_csv(url,  error_bad_lines=False)
+    df = pd.read_csv(url)
     df = df.rename(columns = {'Country/Region':'Country'})
     df = df.groupby('Country').sum().rename_axis('Country')
     df = df.drop(['Lat', 'Long'], axis=1, inplace=False)
