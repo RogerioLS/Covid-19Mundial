@@ -75,16 +75,17 @@ def annotate_bar_horizontal(ax):
                     va = 'center', fontsize=10, color='black', xytext=(0,1),
                     textcoords='offset points', ha='left')
 
-
 def trans_data(df, pais):
-    
-    df = pd.DataFrame(df).rename_axis('data')
-    df['data'] = pd.to_datetime(df['data'])
-    df = df.set_index('data')
-    df = df[pais]
-    
-    return df
+    #df = df.loc[pais][1:]
+    #df = pd.DataFrame(df).rename_axis('data')
+    #df = df.reset_index(level=0, drop=False)
+    date = df['data'].to_list()
+    date = pd.to_datetime(date)
+    data = df[pais].to_list()
+    df = pd.DataFrame(data={pais: data}, index=date)
 
+    return df
+        
 def plot_graf(df, pais):
     
     grup_day = (df.groupby('day')['difference']
@@ -128,6 +129,10 @@ def plot_graf(df, pais):
     
     ts = df[['data', pais]]
     ts = trans_data(ts, pais)
+
+    train_ts = ts[:-60]  
+    test_ts = ts[-60:]
+
     decomposicao = seasonal_decompose(ts, period=12)
     
     #tendencia
@@ -137,10 +142,13 @@ def plot_graf(df, pais):
     #erro
     aleatorio = decomposicao.resid
     
-    modelo = ARIMA(ts, order=(2, 1, 2), freq=ts.index.inferred_freq) 
+    modelo = ARIMA(train_ts, order = (2, 1, 2), freq = train_ts.index.inferred_freq)
     modelo_treinado = modelo.fit()
-    modelo_treinado.summary()
     
+    # Previsão
+    forecast = modelo_treinado.forecast(steps=30)
+    df_forecast = pd.DataFrame(data={"Forecast": forecast}, index=test_ts.index)
+
     fig = plt.figure(figsize=(20,15))
 
     fig.set_constrained_layout('w_pad')
@@ -236,8 +244,8 @@ def plot_graf(df, pais):
         xlabel='Data')
 
     ax08 = fig.add_subplot(gs[-1,:2])
-    eixo = ts.plot()
-    plot_predict(modelo_treinado, '2021-09-01', '2023-02-28', ax = eixo, plot_insample = True)
+    #eixo = ts.plot()
+    plot_predict(modelo_treinado, '2021-09-01', '2023-04-30', ax = ax08, plot_insample = True)
     ax08.set(
         title= f'Forecast dados infectados {pais}',
         ylabel='Quantidades de Casos',
