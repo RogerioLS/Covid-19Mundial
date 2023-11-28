@@ -41,7 +41,7 @@ def get_UN_date():
 df = get_UN_date()
 
 country = 'China'
-dd = df.loc[country]
+dd = df.loc[country][1:]
 dd = pltC.new_df_treaty(dd, country)
 data_min = dd['data'].dt.strftime('%Y/%m/%d').min()
 data_max = dd['data'].dt.strftime('%Y/%m/%d').max()
@@ -95,7 +95,7 @@ st.altair_chart(chart, use_container_width=True)
 tabela_dois = st.sidebar.checkbox('Gráficos')
 if tabela_dois:
     classifier_name = st.sidebar.selectbox('Selecione o País', (list(df.index)))
-    dados = df.loc[classifier_name]
+    dados = df.loc[classifier_name][1:]
     name_country = str(classifier_name)
     dd = pltC.new_df_treaty(dados, name_country)
     data_min_country = dd['data'].dt.strftime('%Y/%m/%d').min()
