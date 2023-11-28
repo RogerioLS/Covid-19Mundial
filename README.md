@@ -13,6 +13,8 @@
 ![Last commit](https://img.shields.io/github/last-commit/RogerioLS/Covid-19Mundial?color=dark-green)
 ![Repo size](https://img.shields.io/github/repo-size/RogerioLS/Covid-19Mundial)
 ![Languages](https://img.shields.io/github/languages/count/RogerioLS/Covid-19Mundial?color=red)
+[![Lines Of Code](https://tokei.rs/b1/github/RogerioLS/Covid-19Mundial?category=code)](https://github.com/XAMPPRocky/tokei)
+![GitHub repo file count (file type)](https://img.shields.io/github/directory-file-count/RogerioLS/Covid-19Mundial?label=files%20sources&color=8602b1)
 
 </div>
 
